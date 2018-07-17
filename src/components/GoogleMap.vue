@@ -1,11 +1,13 @@
 <template>
-    <div>
-    <gmap-map
-      :center="center"
-      :zoom="zoom"
-      style="width:60%;  height: 400px;"
-    >
-    </gmap-map>
+  <div>
+      <div class="map-container">
+      <gmap-map
+        :center="center"
+        :zoom="zoom"
+        style="width:60vw;  height: 60vh;"
+      >
+      </gmap-map>
+    </div>
   </div>
 </template>
 
@@ -52,9 +54,9 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
->
-
+<style scoped lang="scss">
+.map-container {
+  display: flex;
+  justify-content: center;
+}
 </style>
