@@ -3,11 +3,15 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import * as env from '../env';
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 Vue.config.productionTip = false;
 
-// tslint:disable-next-line:no-console
-console.log(env.API_KEY);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: env.API_KEY,
+  },
+});
 
 new Vue({
   router,
