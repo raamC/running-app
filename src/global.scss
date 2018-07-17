@@ -1,0 +1,13 @@
+$yellow: #FCC614;
+$blue: #00A6ED;
+$red: #EF271B;
+$dark-orange: #E84B1B;
+$light-orange: #F4891D;
+
+#app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: darken($blue, 20%);
+  }

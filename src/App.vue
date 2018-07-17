@@ -9,20 +9,17 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import "./global.scss";
+
 #nav {
-  padding: 30px;
+  margin: -10px -10px 0 -10px;
+  padding: 50px;
+  background-color: $yellow;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: darken($blue, 20%);
     &.router-link-exact-active {
-      color: #42b983;
+      color: $blue;
     }
   }
 }
