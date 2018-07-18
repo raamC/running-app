@@ -11,47 +11,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'GoogleMap',
-  data() {
-    return {
-      center: { lat: 51.555, lng: -0.155 },
-      zoom: 15,
-    };
-  },
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { Position } from '../models/position'
 
-  mounted() {
-    this.geolocate();
-  },
+@Component
+    export default class GoogleMap extends Vue {
+    center: Position = { lat: 51.555, lng: -0.155 };
+    zoom: number = 15;
+  }
 
-  methods: {
-    // receives a place object via the autocomplete component
-    setPlace(place) {
-      this.currentPlace = place;
-    },
-    addMarker() {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng(),
-        };
-        this.markers.push({ position: marker });
-        this.places.push(this.currentPlace);
-        this.center = marker;
-        this.currentPlace = null;
-      }
-    },
-    geolocate() {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-      });
-    },
-  },
-};
+
+
+// export default {
+//   name: 'GoogleMap',
+//   data() {
+//     return {
+//       center: { lat: 51.555, lng: -0.155 },
+//       zoom: 15,
+//     };
+//   },
+// }
 </script>
 
 <style scoped lang="scss">

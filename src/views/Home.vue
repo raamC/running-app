@@ -5,15 +5,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import GoogleMap from '@/components/GoogleMap.vue'; // @ is an alias to /src
+import { Component, Vue } from "vue-property-decorator";
+import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import GoogleMap from "@/components/GoogleMap.vue"; // @ is an alias to /src
 
 @Component({
   components: {
     HelloWorld,
-    GoogleMap,
-  },
+    GoogleMap
+  }
 })
 export default class Home extends Vue {}
 </script>
@@ -22,13 +22,11 @@ export default class Home extends Vue {}
 @import "../global.scss";
 
 .home {
-margin: 0 -10px;
-background-color: $red;
-height: 90vh;
+  margin: 0 -10px;
+  height: 90vh;
 }
 
 .map {
-  padding: 100px;
+  margin: 100px;
 }
-
 </style>

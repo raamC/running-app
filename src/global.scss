@@ -6,8 +6,12 @@ $light-orange: #F4891D;
 
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: darken($blue, 20%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+body {
+  background-color: $red;
+}
