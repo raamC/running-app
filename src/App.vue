@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
@@ -12,14 +12,18 @@
 @import "./global.scss";
 
 #nav {
-  margin: -10px -10px 0 -10px;
-  padding: 5vh;
-  background-color: $yellow;
+  margin: -8px;
+  padding: 3vh;
+  background-color: $grey;
+  display: flex;
   a {
+    text-decoration: none;
     font-weight: bold;
-    color: darken($blue, 20%);
+    font-size: 3em;
+    padding: 0 20px;
+    color: $dark-orange;
     &.router-link-exact-active {
-      color: $blue;
+      color: $yellow;
     }
   }
 }

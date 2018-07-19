@@ -1,17 +1,20 @@
-$yellow: #FCC614;
+$yellow: #F4DB1A;
 $blue: #00A6ED;
 $red: #EF271B;
 $dark-orange: #E84B1B;
 $light-orange: #F4891D;
+$grey: #424242;
+
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
 #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Permanent Marker', Helvetica, Arial, sans-serif;
     text-align: center;
-    color: darken($blue, 20%);
+    color: $grey;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
 body {
-  background-color: $red;
+  background-color: $dark-orange;
 }
