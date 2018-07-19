@@ -5,19 +5,14 @@
         :center="center"
         :zoom="zoom"
         style="width:60vw;  height: 60vh;"
+        @click="addMarker"
       >
         <gmap-marker
-          :position="{ lat: 51.555, lng: -0.155 }"
-          @click="center={ lat: 51.555, lng: -0.155 }"
-          >
-        </gmap-marker>
-        <!-- <gmap-marker
           :key="index"
           v-for="(m, index) in markers"
-          :position="m.position"
-          @click="center=m.position"
+          :position="m"
           >
-        </gmap-marker> -->
+        </gmap-marker>
       </gmap-map>
     </div>
   </div>
@@ -29,25 +24,29 @@ import { Position } from '../models/position';
 
 @Component
 export default class GoogleMap extends Vue {
-    // Data properties
-    private center: Position = { lat: 51.555, lng: -0.155 };
-    private zoom: number = 12;
-    private markers: Position[] = [{ lat: 51.555, lng: -0.155 }];
+  // Data properties
+  private center: Position = { lat: 51.555, lng: -0.155 };
+  private zoom: number = 12;
+  private markers: Position[] = [{ lat: 51.555, lng: -0.155 }];
 
-    // Lifecycle hooks
-    private mounted() {
-      this.geolocate();
-    }
+  // Lifecycle hooks
+  private mounted() {
+    this.geolocate();
+  }
 
-    // Component methods
-    private geolocate() {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-      });
-    }
+  // Component methods
+  private geolocate() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+    });
+  }
+
+  private addMarker(event: any) {
+    this.markers.push(event.latLng);
+  }
 }
 </script>
 
