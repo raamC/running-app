@@ -29,7 +29,6 @@ export default class GoogleMap extends Vue {
   // Data properties
   private center: Position = { lat: 51.555, lng: -0.155 };
   private zoom: number = 12;
-  private path: Position[] = [];
 
   // Lifecycle hooks
   private mounted() {
@@ -37,6 +36,9 @@ export default class GoogleMap extends Vue {
   }
 
   // Computed value
+  get path() {
+    return this.$store.state.path;
+  }
 
   // Component methods
   private geolocate() {
@@ -50,17 +52,7 @@ export default class GoogleMap extends Vue {
 
   private addMarker(event: any) {
     this.path.push(event.latLng);
-    this.$store.commit('updateDistance', this.calculateDistance())
-  }
-
-  private calculateDistance() {
-    let total = 0;
-    if (this.path.length > 1) {
-      for (let i = 0; i < this.path.length - 1; i++) {
-        total += google.maps.geometry.spherical.computeDistanceBetween(this.path[i], this.path[i + 1]);
-      }
-    }
-    return total;
+    this.$store.commit('updatePath', this.path)
   }
 }
 </script>

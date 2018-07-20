@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    distance: 0,
+    path: [],
   },
   mutations: {
-    updateDistance(state, newDistance) {
-      state.distance = newDistance;
+    updatePath(state, newPath) {
+      state.path = newPath;
     },
   },
   actions: {
