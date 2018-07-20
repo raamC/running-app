@@ -13,13 +13,13 @@
 
 #nav {
   margin: -8px;
-  padding: 3vh;
+  padding: 2vh;
   background-color: $grey;
   display: flex;
   a {
     text-decoration: none;
     font-weight: bold;
-    font-size: 3em;
+    font-size: 4em;
     padding: 0 20px;
     color: $dark-orange;
     &.router-link-exact-active {
