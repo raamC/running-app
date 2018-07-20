@@ -25,6 +25,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Position } from '../models/position';
 import { gmapApi } from 'vue2-google-maps';
+declare const google: any;
 
 @Component
 export default class GoogleMap extends Vue {
@@ -69,5 +70,10 @@ export default class GoogleMap extends Vue {
 .map-container {
   display: flex;
   justify-content: center;
+}
+
+.distance {
+  margin: 30px;
+  font-size: 35px;
 }
 </style>
