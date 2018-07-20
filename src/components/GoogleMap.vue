@@ -17,7 +17,7 @@
         </gmap-marker>
       </gmap-map>
     </div>
-    <div class="distance">{{ distance }}</div>
+    <div class="distance">{{ distance }} km</div>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default class GoogleMap extends Vue {
         total += google.maps.geometry.spherical.computeDistanceBetween(this.path[i], this.path[i + 1]);
       }
     }
-    return total;
+    return (total / 1000).toFixed(2);
   }
 
   // Component methods
