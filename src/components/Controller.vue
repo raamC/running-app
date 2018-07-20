@@ -1,11 +1,13 @@
 <template>
   <div class="controller">
     <div class="distance">
-      {{ distance }}km
+      {{ distanceString }}
     </div>
-    <div id="clearButton">
-  <b-button @click="resetPath">Clear</b-button>
-</div>
+    <div class="buttonPanel">
+      <b-button @click="changeUnits">Change units</b-button>
+      <b-button @click="removeLastMarker">Remove point</b-button>
+      <b-button @click="resetPath">Clear</b-button>
+    </div>
   </div>
 </template>
 
@@ -17,7 +19,7 @@ declare const google: any;
 @Component
 export default class Controller extends Vue {
   // Data properties
-
+  private isInKilometers: boolean = true;
 
   // Lifecycle hooks
   
@@ -25,6 +27,13 @@ export default class Controller extends Vue {
   // Computed value
   get path() {
     return this.$store.state.path;
+  }
+
+  get distanceString() {
+      if (this.isInKilometers) {
+        return `${this.distance} km`
+      }
+      return `${(0.621371 * parseFloat(this.distance)).toFixed(2)} m`
   }
 
   get distance() {
@@ -43,6 +52,15 @@ export default class Controller extends Vue {
     return total;
   }
 
+  private changeUnits() {
+    this.isInKilometers = !this.isInKilometers;
+  }
+
+  private removeLastMarker() {
+    this.path.pop()
+    this.$store.commit('updatePath', this.path)
+  }
+
   private resetPath() {
     this.$store.commit('updatePath', [])
   }
@@ -58,10 +76,21 @@ export default class Controller extends Vue {
   min-width: 300px;
   display: flex;
   flex-direction: column;
+  align-items:center;
 }
 
 .distance {
-  margin: 30px;
+  margin: 30px 0 50px;
   font-size: 35px;
+}
+
+.buttonPanel {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.buttonPanel > * {
+  margin: 10px;
 }
 </style>
