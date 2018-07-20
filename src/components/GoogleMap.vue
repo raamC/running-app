@@ -47,6 +47,7 @@ export default class GoogleMap extends Vue {
         total += google.maps.geometry.spherical.computeDistanceBetween(this.path[i], this.path[i + 1]);
       }
     }
+    this.$store.commit('updateDistance', total)
     return (total / 1000).toFixed(2);
   }
 

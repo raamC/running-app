@@ -1,18 +1,19 @@
 <template>
   <div class="home">
     <googleMap class="map"/>
+    <controller />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import GoogleMap from '@/components/GoogleMap.vue'; // @ is an alias to /src
+import Controller from '@/components/Controller.vue'
 
 @Component({
   components: {
-    HelloWorld,
     GoogleMap,
+    Controller,
   },
 })
 export default class Home extends Vue {}
