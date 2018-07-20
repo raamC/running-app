@@ -1,4 +1,4 @@
-# running-app
+# Personal Run Tracker
 
 ## Project setup
 ```
@@ -18,4 +18,12 @@ yarn run build
 ### Lints and fixes files
 ```
 yarn run lint
+```
+
+## Firebase
+
+### Deploys to Firebase
+From root directory
+```
+firebase deploy
 ```
