@@ -1,23 +1,20 @@
 <template>
-  <div>
-      <div class="map-container">
-      <gmap-map
-        :center="center"
-        :zoom="zoom"
-        style="width:60vw;  height: 60vh;"
-        @click="addMarker"
-      >
-      <gmap-polyline v-bind:path.sync="path" v-bind:options="{ strokeColor:'#424242'}">
-         </gmap-polyline>
-        <gmap-marker
-          :key="index"
-          v-for="(m, index) in path"
-          :position="m"
-          >
-        </gmap-marker>
-      </gmap-map>
-    </div>
-    <div class="distance">{{ distance }} km</div>
+  <div class="map-container">
+    <gmap-map
+      :center="center"
+      :zoom="zoom"
+      style="width:60vw;  height: 60vh;"
+      @click="addMarker"
+    >
+    <gmap-polyline v-bind:path.sync="path" v-bind:options="{ strokeColor:'#424242'}">
+        </gmap-polyline>
+      <gmap-marker
+        :key="index"
+        v-for="(m, index) in path"
+        :position="m"
+        >
+      </gmap-marker>
+    </gmap-map>
   </div>
 </template>
 
@@ -39,17 +36,7 @@ export default class GoogleMap extends Vue {
     this.geolocate();
   }
 
-  // // Computed value
-  get distance() {
-    let total = 0;
-    if (this.path.length > 1) {
-      for (let i = 0; i < this.path.length - 1; i++) {
-        total += google.maps.geometry.spherical.computeDistanceBetween(this.path[i], this.path[i + 1]);
-      }
-    }
-    this.$store.commit('updateDistance', total)
-    return (total / 1000).toFixed(2);
-  }
+  // Computed value
 
   // Component methods
   private geolocate() {
@@ -63,6 +50,17 @@ export default class GoogleMap extends Vue {
 
   private addMarker(event: any) {
     this.path.push(event.latLng);
+    this.$store.commit('updateDistance', this.calculateDistance())
+  }
+
+  private calculateDistance() {
+    let total = 0;
+    if (this.path.length > 1) {
+      for (let i = 0; i < this.path.length - 1; i++) {
+        total += google.maps.geometry.spherical.computeDistanceBetween(this.path[i], this.path[i + 1]);
+      }
+    }
+    return total;
   }
 }
 </script>
@@ -71,10 +69,5 @@ export default class GoogleMap extends Vue {
 .map-container {
   display: flex;
   justify-content: center;
-}
-
-.distance {
-  margin: 30px;
-  font-size: 35px;
 }
 </style>

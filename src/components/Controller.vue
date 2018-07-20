@@ -1,6 +1,9 @@
 <template>
-  <div>
-      {{ distance }}
+  <div class="controller">
+    <div class="distance">
+      {{ distance }}km
+
+    </div>
   </div>
 </template>
 
@@ -17,7 +20,8 @@ export default class Controller extends Vue {
 
   // Computed value
   get distance() {
-    return this.$store.state.distance;
+    const distance = this.$store.state.distance;
+    return (distance / 1000).toFixed(2);
   }
 
   // Component methods
@@ -28,4 +32,17 @@ export default class Controller extends Vue {
 
 <style scoped lang="scss">
 
+.controller {
+  background-color: white;
+  height: 400px;
+  width: 20vw;
+  min-width: 300px;
+  display: flex;
+  justify-content: left;
+}
+
+.distance {
+  margin: 30px;
+  font-size: 35px;
+}
 </style>

@@ -22,7 +22,13 @@ export default class Home extends Vue {}
 <style lang="scss" scoped >
 @import "../global.scss";
 
-.map {
-  margin: 100px;
-}
+  .home {
+    display: flex;
+    margin: 100px;
+  }
+
+  .map {
+    margin-right: 100px;
+  }
+
 </style>
