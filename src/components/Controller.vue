@@ -4,7 +4,7 @@
       {{ distance }}km
     </div>
     <div id="clearButton">
-  <button @click="resetPath">Clear</button>
+  <b-button @click="resetPath">Clear</b-button>
 </div>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default class Controller extends Vue {
   width: 20vw;
   min-width: 300px;
   display: flex;
-  justify-content: left;
+  flex-direction: column;
 }
 
 .distance {
