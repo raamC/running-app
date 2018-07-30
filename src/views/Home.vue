@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import GoogleMap from '@/components/GoogleMap.vue'; // @ is an alias to /src
+import { Component, Vue } from 'vue-property-decorator'
+import GoogleMap from '@/components/GoogleMap.vue' // @ is an alias to /src
 import Controller from '@/components/Controller.vue'
 
 @Component({
