@@ -6,7 +6,7 @@
       style="width:60vw;  height: 60vh;"
       @click="addMarker"
     >
-    <gmap-polyline v-bind:path.sync="clickedPath" v-bind:options="{ strokeColor:'#424242'}">
+    <gmap-polyline v-bind:path.sync="snappedPath" v-bind:options="{ strokeColor:'#424242'}">
         </gmap-polyline>
       <gmap-marker
         :key="index"
@@ -39,6 +39,10 @@ export default class GoogleMap extends Vue {
   // Computed value
   get clickedPath() {
     return this.$store.state.clickedPath;
+  }
+
+  get snappedPath() {
+    return this.$store.state.snappedPath;
   }
 
   // Component methods

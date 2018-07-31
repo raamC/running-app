@@ -38,7 +38,6 @@ export default class Controller extends Vue {
 
   get distance() {
     const distance = this.calculateDistance();
-    console.log(this.$store.state.clickedPath[0]);
     return (distance / 1000).toFixed(2);
   }
 

@@ -38,6 +38,9 @@ export default new Vuex.Store({
           }))
           .then((snappedPath) => commit('updateSnappedPath', snappedPath));
       }
+      if (newPath.length === 0) {
+        commit('updateSnappedPath', []);
+      }
     },
   },
 });
