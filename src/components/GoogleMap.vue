@@ -1,28 +1,28 @@
 <template>
-  <div class="map-container">
+  <div class='map-container'>
     <gmap-map
-      :center="center"
-      :zoom="zoom"
-      style="width:60vw;  height: 60vh;"
-      @click="addMarker"
+      :center='center'
+      :zoom='zoom'
+      style='width:60vw;  height: 60vh;'
+      @click='addMarker'
     >
-    <gmap-polyline v-bind:path.sync="snappedPath" v-bind:options="{ strokeColor:'#424242'}">
+    <gmap-polyline v-bind:path.sync='snappedPath' v-bind:options='{ strokeColor:'#424242'}'>
         </gmap-polyline>
       <gmap-marker
-        :key="index"
-        v-for="(m, index) in clickedPath"
-        :position="m"
+        :key='index'
+        v-for='(m, index) in clickedPath'
+        :position='m'
         >
       </gmap-marker>
     </gmap-map>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { Position } from "../models/position";
-import { gmapApi } from "vue2-google-maps";
-import { constants } from "http2";
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
+import { Position } from '../models/position';
+import { gmapApi } from 'vue2-google-maps';
+import { constants } from 'http2';
 declare const google: any;
 
 @Component
@@ -47,17 +47,17 @@ export default class GoogleMap extends Vue {
 
   // Component methods
   private geolocate() {
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lng: position.coords.longitude,
       };
     });
   }
 
   private addMarker(event: any) {
     this.clickedPath.push(event.latLng);
-    this.$store.dispatch("updatePaths", this.clickedPath);
+    this.$store.dispatch('updatePaths', this.clickedPath);
   }
 
   private preparePathStringForRoadsApi() {
@@ -66,7 +66,7 @@ export default class GoogleMap extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .map-container {
   display: flex;
   justify-content: center;

@@ -1,21 +1,20 @@
 <template>
-  <div class="controller">
-    <div class="distance">
+  <div class='controller'>
+    <div class='distance'>
       {{ distanceString }}
     </div>
-    <div class="buttonPanel">
-      <b-button @click="changeUnits">Change units</b-button>
-      <b-button @click="removeLastMarker">Remove point</b-button>
-      <b-button @click="resetPath">Clear</b-button>
+    <div class='buttonPanel'>
+      <b-button @click='changeUnits'>Change units</b-button>
+      <b-button @click='removeLastMarker'>Remove point</b-button>
+      <b-button @click='resetPath'>Clear</b-button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { Component, Vue } from "vue-property-decorator";
 import { gmapApi } from "vue2-google-maps";
 declare const google: any;
-
 
 @Component
 export default class Controller extends Vue {
@@ -48,7 +47,7 @@ export default class Controller extends Vue {
       for (let i = 0; i < this.clickedPath.length - 1; i++) {
         total += google.maps.geometry.spherical.computeDistanceBetween(
           this.clickedPath[i],
-          this.clickedPath[i + 1]
+          this.clickedPath[i + 1],
         );
       }
     }
@@ -70,7 +69,7 @@ export default class Controller extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .controller {
   background-color: white;
   height: 400px;

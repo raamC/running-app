@@ -1,27 +1,27 @@
 <template>
-  <div class="home">
-    <googleMap class="map"/>
+  <div class='home'>
+    <googleMap class='map'/>
     <controller />
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import GoogleMap from "@/components/GoogleMap.vue"; // @ is an alias to /src
-import Controller from "@/components/Controller.vue";
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
+import GoogleMap from '@/components/GoogleMap.vue'; // @ is an alias to /src
+import Controller from '@/components/Controller.vue';
 
 @Component({
   components: {
     GoogleMap,
-    Controller
-  }
+    Controller,
+  },
 })
 export default class Home extends Vue {}
 
 </script>
 
-<style lang="scss" scoped >
-@import "../global.scss";
+<style lang='scss' scoped >
+@import '../global.scss';
 
 .home {
   display: flex;

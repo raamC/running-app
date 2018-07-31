@@ -33,7 +33,7 @@ export default new Vuex.Store({
             },
           })
           .then((response) =>  response.data.snappedPoints)
-          .then((snappedPoints) => snappedPoints.map((p) => {
+          .then((snappedPoints) => snappedPoints.map((p: any) => {
             return {lat: p.location.latitude, lng: p.location.longitude};
           }))
           .then((snappedPath) => commit('updateSnappedPath', snappedPath));
@@ -46,7 +46,7 @@ export default new Vuex.Store({
 });
 
 function preparePathString(path: any) {
-  const rawPathString = (path.toString()).split(',').map((p) => p.replace('(', '').replace(')', ''));
+  const rawPathString = (path.toString()).split(',').map((p: any) => p.replace('(', '').replace(')', ''));
   let pathString = '';
   for (let i = 0; i < rawPathString.length; i += 2) {
     pathString = pathString + rawPathString[i] + ',' + rawPathString[i + 1] + '|';
