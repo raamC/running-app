@@ -17,6 +17,7 @@ import Controller from "@/components/Controller.vue";
   }
 })
 export default class Home extends Vue {}
+
 </script>
 
 <style lang="scss" scoped >
