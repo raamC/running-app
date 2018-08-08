@@ -3,9 +3,9 @@
     <div class="loginBox">
       <h1>Log In</h1>
       <h3>Email</h3>
-      <input type="text" v-model="email" placeholder="Email">
+      <b-form-input type="text" v-model="email" placeholder="Email"></b-form-input>
       <h3>Password</h3>
-      <input type="password" v-model="password" placeholder="Password">
+      <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
       <b-button @click="login">Login</b-button>
     </div>
   </div>
@@ -30,7 +30,7 @@ export default class Login extends Vue {
   private login() {
     firebase.auth().signInWithEmailAndPassword(this.email.toString().trim(), this.password.toString().trim()).then(
       function (user) {
-        alert('Login successful!');
+        // alert('Login successful!');
       },
       function (err) {
         alert ('Oops. ' + err.message)
@@ -57,6 +57,7 @@ export default class Login extends Vue {
     margin: 100px;
     padding: 40px;
     width: 600px;
+    height: 600px;
     background-color: white;
     border: 10px solid $grey;
 
@@ -69,7 +70,7 @@ export default class Login extends Vue {
     }
 
     button {
-      margin: 30px 0;
+      margin: 70px 0;
       background-color: $dark-orange;
     }
   }
