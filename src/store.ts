@@ -29,7 +29,7 @@ export default new Vuex.Store({
             params: {
               path: pathString,
               interpolate: true,
-              key: env.API_KEY,
+              key: env.MAPS_API_KEY,
             },
           })
           .then((response) =>  response.data.snappedPoints)
