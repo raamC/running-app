@@ -1,5 +1,5 @@
 <template>
-  <div class='auth'>
+  <div class='background'>
     <div class="loginBox">
       <h1>Log In</h1>
       <h3>Email</h3>
@@ -41,9 +41,15 @@ export default class Login extends Vue {
 </script>
 
 <style scoped lang='scss'>
-.auth {
+@import "../global.scss";
+.background {
   display: flex;
   justify-content: center;
+  background-image: url("../assets/running.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
   .loginBox {
     display: flex;
@@ -52,13 +58,19 @@ export default class Login extends Vue {
     padding: 40px;
     width: 600px;
     background-color: white;
+    border: 10px solid $grey;
 
     h3 {
       margin: 40px 0 20px 0;
     }
 
+    h1 {
+      color: $dark-orange;
+    }
+
     button {
       margin: 30px 0;
+      background-color: $dark-orange;
     }
   }
 }
