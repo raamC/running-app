@@ -13,29 +13,29 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 import * as env from '../../env';
 import firebase from 'firebase';
 
 @Component
 export default class Login extends Vue {
   // Data properties
-  private email = ''
-  private password = ''
+  private email = '';
+  private password = '';
 
   // Lifecycle hooks
   // Computed value
   // Component methods
 
   private login() {
-    firebase.auth().signInWithEmailAndPassword(this.email.toString().trim(), this.password.toString().trim()).then(
-      function (user) {
+    firebase.auth().signInWithEmailAndPassword(this.email.toString().trim(), this.password.toString().trim())
+    .then((user) => {
         // alert('Login successful!');
       },
-      function (err) {
-        alert ('Oops. ' + err.message)
-      }
-    )
+      (err) => {
+        alert ('Oops. ' + err.message);
+      },
+    );
   }
 }
 </script>
@@ -45,7 +45,7 @@ export default class Login extends Vue {
 .background {
   display: flex;
   justify-content: center;
-  background-image: url("../assets/running.jpg");
+  background-image: url('../assets/running.jpg');
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;

@@ -12,8 +12,8 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
-import { gmapApi } from "vue2-google-maps";
+import { Component, Vue } from 'vue-property-decorator';
+import { gmapApi } from 'vue2-google-maps';
 declare const google: any;
 
 @Component
@@ -60,11 +60,11 @@ export default class Controller extends Vue {
 
   private removeLastMarker() {
     this.clickedPath.pop();
-    this.$store.dispatch("updatePaths", this.clickedPath);
+    this.$store.dispatch('updatePaths', this.clickedPath);
   }
 
   private resetPath() {
-    this.$store.dispatch("updatePaths", []);
+    this.$store.dispatch('updatePaths', []);
   }
 }
 </script>
