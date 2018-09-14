@@ -74,6 +74,7 @@ export default class Home extends Vue {
     font-size: 4em;
     padding: 0 20px;
     color: $dark-orange;
+    cursor: pointer;
     &.router-link-exact-active {
       color: $yellow;
     }
