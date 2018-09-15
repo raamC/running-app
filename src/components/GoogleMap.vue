@@ -59,10 +59,6 @@ export default class GoogleMap extends Vue {
     this.clickedPath.push(event.latLng);
     this.$store.dispatch('updatePaths', this.clickedPath);
   }
-
-  private preparePathStringForRoadsApi() {
-    const clickedPath = this.$store.state.clickedPath;
-  }
 }
 </script>
 

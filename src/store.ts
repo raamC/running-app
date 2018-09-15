@@ -12,6 +12,9 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    // Mutations take the state as the first argument
+    // so you don't need to specify it in the arguments in the actions
+
     updateClickedPath(state, newPath) {
       state.clickedPath = newPath;
     },
@@ -20,6 +23,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+
+    // This syntax uses ES2015 argument destructuring to simplify the code
+    // It is equivalent to updatePaths (context, newPath) {
+    // context.commit('updateClickedPath')
     updatePaths({ commit }, newPath) {
       commit('updateClickedPath', newPath);
       if (newPath.length > 1) {
