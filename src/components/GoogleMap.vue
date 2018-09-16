@@ -12,7 +12,7 @@
     </gmap-polyline>
       <gmap-marker
         :key='index'
-        v-for='(m, index) in markers'
+        v-for='(m, index) in clickedPath'
         :position='m'
         >
       </gmap-marker>
@@ -32,11 +32,14 @@ export default class GoogleMap extends Vue {
   // Data properties
   private center: Position = { lat: 51.555, lng: -0.155 };
   private zoom: number = 14;
-  public clickedPath: any = [];
 
   // Lifecycle hooks
   private mounted() {
     this.geolocate();
+  }
+
+  get clickedPath() {
+    return this.$store.state.clickedPath;
   }
 
   get completedPath() {
@@ -45,12 +48,6 @@ export default class GoogleMap extends Vue {
 
   get isSnapped() {
     return this.$store.state.isSnapped;
-  }
-
-  get markers() {
-    const start = this.clickedPath[0];
-    const end = this.clickedPath[this.clickedPath.length - 1];
-    return [start, end]
   }
 
   // Component methods
@@ -64,7 +61,7 @@ export default class GoogleMap extends Vue {
   }
 
   private addMarker(event: any) {
-    this.clickedPath.push(event.latLng);
+    this.$store.commit('updateClickedPath', event.latLng);
     if(this.clickedPath.length > 1){
       var stepObject = {
         start: this.clickedPath[this.clickedPath.length - 2],

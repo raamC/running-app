@@ -25,6 +25,10 @@ export default new Vuex.Store({
     // Mutations take the state as the first argument
     // so you don't need to specify it in the arguments in the actions
 
+    updateClickedPath(state, marker) {
+      state.clickedPath.push(marker);
+    },
+
     addNewStep(state, pathArray) {
       state.steps.push(pathArray);
     },
@@ -42,6 +46,7 @@ export default new Vuex.Store({
       state.steps = [];
       state.completedPath = [];
       state.distance = 0;
+      state.clickedPath = [];
     },
 
     toggleIsSnapped(state) {
@@ -49,7 +54,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    updateSteps({ commit, dispatch, state }, stepObject) {
+    updateSteps({ commit, state }, stepObject) {
       if (stepObject.isSnapped) {
         const pathString = preparePathString([stepObject.start, stepObject.end]);
         axios
