@@ -64,8 +64,7 @@ export default class Controller extends Vue {
   }
 
   private removeLastMarker() {
-    this.completedPath.pop();
-    this.$store.dispatch('updatePaths', this.completedPath);
+    this.$store.dispatch('removeLastStep');
   }
 
   private resetPath() {

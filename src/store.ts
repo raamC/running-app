@@ -9,16 +9,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
 
-    isSnapped: true,
-
-    clickedPath: [],
-
     // A 2D array of paths
     steps: [],
-
-    // To be calculated from steps
+    isSnapped: true,
+    clickedPath: [],
     completedPath: [],
-
     distance: 0,
   },
   mutations: {
@@ -31,6 +26,14 @@ export default new Vuex.Store({
 
     addNewStep(state, pathArray) {
       state.steps.push(pathArray);
+    },
+
+    removeLastStepMutation(state) {
+      state.steps.pop();
+    },
+
+    removeLastClickedMarker(state) {
+      state.clickedPath.pop();
     },
 
     // Flattens steps and removes duplicates
@@ -79,6 +82,13 @@ export default new Vuex.Store({
         commit('getCompletedPathFromSteps');
         commit('updateDistance', calculateDistance(state.completedPath));
       }
+    },
+
+    removeLastStep({ commit, state }) {
+      commit('removeLastStepMutation');
+      commit('getCompletedPathFromSteps');
+      commit('updateDistance', calculateDistance(state.completedPath));
+      commit('removeLastClickedMarker');
     },
   },
 });
