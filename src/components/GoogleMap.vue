@@ -12,7 +12,7 @@
     </gmap-polyline>
       <gmap-marker
         :key='index'
-        v-for='(m, index) in clickedPath'
+        v-for='(m, index) in markers'
         :position='m'
         >
       </gmap-marker>
@@ -45,6 +45,12 @@ export default class GoogleMap extends Vue {
 
   get isSnapped() {
     return this.$store.state.isSnapped;
+  }
+
+  get markers() {
+    const start = this.clickedPath[0];
+    const end = this.clickedPath[this.clickedPath.length - 1];
+    return [start, end]
   }
 
   // Component methods
