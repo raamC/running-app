@@ -6,8 +6,10 @@
       style='width:60vw;  height: 60vh;'
       @click='addMarker'
     >
-    <gmap-polyline v-bind:path.sync="completedPath" v-bind:options="{ strokeColor:'#424242'}">
-        </gmap-polyline>
+    <gmap-polyline 
+      v-bind:path.sync="completedPath" 
+      v-bind:options="{ strokeColor:'#424242'}">
+    </gmap-polyline>
       <gmap-marker
         :key='index'
         v-for='(m, index) in clickedPath'
