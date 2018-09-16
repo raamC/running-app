@@ -66,17 +66,14 @@ export default new Vuex.Store({
           }))
           .then((snappedPath) => commit('addNewStep', snappedPath))
           .then(() => commit('getCompletedPathFromSteps'))
-          .then(() => dispatch('updateDistanceAction'));
+          .then(() => {
+            commit('updateDistance', calculateDistance(state.completedPath));
+          });
       } else {
         commit('addNewStep', [stepObject.start, stepObject.end]);
         commit('getCompletedPathFromSteps');
-        dispatch('updateDistanceAction');
+        commit('updateDistance', calculateDistance(state.completedPath));
       }
-    },
-
-    updateDistanceAction({ commit, state }) {
-      const newDistance = calculateDistance(state.completedPath);
-      commit('updateDistance', newDistance);
     },
   },
 });
@@ -100,14 +97,14 @@ function calculateDistance(path) {
   if (path.length > 1) {
     for (let i = 0; i < path.length - 1; i++) {
       total += google.maps.geometry.spherical.computeDistanceBetween(
-        convertStringToLatLng(path[i].toString()),
-        convertStringToLatLng(path[i + 1].toString()));
+        convertPointToLatLng(path[i]),
+        convertPointToLatLng(path[i + 1]));
     }
   }
   return total;
 }
 
-function convertStringToLatLng(latLngString) {
-  const latLngArray = latLngString.split(',').map((str) => parseFloat(str.match(/[0-9\-\.]/g).join('')));
-  return new google.maps.LatLng(latLngArray[0], latLngArray[1]);
+function convertPointToLatLng(point) {
+  const latLngObj = JSON.parse(JSON.stringify(point));
+  return new google.maps.LatLng(latLngObj.lat, latLngObj.lng);
 }
