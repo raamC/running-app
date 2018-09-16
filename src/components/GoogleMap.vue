@@ -6,7 +6,7 @@
       style='width:60vw;  height: 60vh;'
       @click='addMarker'
     >
-    <gmap-polyline v-bind:path.sync="snappedPath" v-bind:options="{ strokeColor:'#424242'}">
+    <gmap-polyline v-bind:path.sync="completedPath" v-bind:options="{ strokeColor:'#424242'}">
         </gmap-polyline>
       <gmap-marker
         :key='index'
@@ -30,19 +30,19 @@ export default class GoogleMap extends Vue {
   // Data properties
   private center: Position = { lat: 51.555, lng: -0.155 };
   private zoom: number = 14;
+  public clickedPath: any = [];
 
   // Lifecycle hooks
   private mounted() {
     this.geolocate();
   }
 
-  // Computed value
-  get clickedPath() {
-    return this.$store.state.clickedPath;
+  get completedPath() {
+    return this.$store.state.completedPath;
   }
 
-  get snappedPath() {
-    return this.$store.state.snappedPath;
+  get isSnapped() {
+    return this.$store.state.isSnapped;
   }
 
   // Component methods
@@ -57,7 +57,14 @@ export default class GoogleMap extends Vue {
 
   private addMarker(event: any) {
     this.clickedPath.push(event.latLng);
-    this.$store.dispatch('updatePaths', this.clickedPath);
+    if(this.clickedPath.length > 1){
+      var stepObject = {
+        start: this.clickedPath[this.clickedPath.length - 2],
+        end: this.clickedPath[this.clickedPath.length - 1],
+        isSnapped: this.isSnapped,
+      }
+      this.$store.dispatch('updateSteps', stepObject);
+    }
   }
 }
 </script>

@@ -3,8 +3,12 @@
     <div class='distance'>
       {{ distanceString }}
     </div>
+    <div class='toggle'>
+      {{ toggleString }}
+    </div>
     <div class='buttonPanel'>
       <b-button @click='changeUnits'>Change units</b-button>
+      <b-button @click='toggleIsSnapped'>Toggle lines</b-button>
       <b-button @click='removeLastMarker'>Remove point</b-button>
       <b-button @click='resetPath'>Clear</b-button>
     </div>
@@ -13,7 +17,6 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
-import { gmapApi } from 'vue2-google-maps';
 declare const google: any;
 
 @Component
@@ -24,8 +27,17 @@ export default class Controller extends Vue {
   // Lifecycle hooks
 
   // Computed value
-  get clickedPath() {
-    return this.$store.state.clickedPath;
+  get completedPath() {
+    return this.$store.state.completedPath;
+  }
+
+  get isSnapped() {
+    return this.$store.state.isSnapped;
+  }
+
+  get distance() {
+    const distance = this.$store.state.distance;
+    return (distance / 1000).toFixed(2);
   }
 
   get distanceString() {
@@ -35,23 +47,16 @@ export default class Controller extends Vue {
     return `${(0.621371 * parseFloat(this.distance)).toFixed(2)} m`;
   }
 
-  get distance() {
-    const distance = this.calculateDistance();
-    return (distance / 1000).toFixed(2);
+  get toggleString() {
+    if(this.isSnapped) {
+      return `Autosnap`;
+    } else {
+      return 'Manual';
+    }
   }
 
-  // Component methods
-  private calculateDistance() {
-    let total = 0;
-    if (this.clickedPath.length > 1) {
-      for (let i = 0; i < this.clickedPath.length - 1; i++) {
-        total += google.maps.geometry.spherical.computeDistanceBetween(
-          this.clickedPath[i],
-          this.clickedPath[i + 1],
-        );
-      }
-    }
-    return total;
+  private toggleIsSnapped() {
+    this.$store.commit('toggleIsSnapped')
   }
 
   private changeUnits() {
@@ -59,12 +64,12 @@ export default class Controller extends Vue {
   }
 
   private removeLastMarker() {
-    this.clickedPath.pop();
-    this.$store.dispatch('updatePaths', this.clickedPath);
+    this.completedPath.pop();
+    this.$store.dispatch('updatePaths', this.completedPath);
   }
 
   private resetPath() {
-    this.$store.dispatch('updatePaths', []);
+    this.$store.commit('clearSteps');
   }
 }
 </script>
