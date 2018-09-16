@@ -48,7 +48,7 @@ export default class Controller extends Vue {
   }
 
   get toggleString() {
-    if(this.isSnapped) {
+    if (this.isSnapped) {
       return `Autosnap`;
     } else {
       return 'Manual';
@@ -56,7 +56,7 @@ export default class Controller extends Vue {
   }
 
   private toggleIsSnapped() {
-    this.$store.commit('toggleIsSnapped')
+    this.$store.commit('toggleIsSnapped');
   }
 
   private changeUnits() {

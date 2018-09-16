@@ -62,12 +62,12 @@ export default class GoogleMap extends Vue {
 
   private addMarker(event: any) {
     this.$store.commit('updateClickedPath', event.latLng);
-    if(this.clickedPath.length > 1){
-      var stepObject = {
+    if (this.clickedPath.length > 1) {
+      const stepObject = {
         start: this.clickedPath[this.clickedPath.length - 2],
         end: this.clickedPath[this.clickedPath.length - 1],
         isSnapped: this.isSnapped,
-      }
+      };
       this.$store.dispatch('updateSteps', stepObject);
     }
   }
