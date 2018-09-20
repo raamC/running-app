@@ -5,9 +5,12 @@
       <router-link to="/savedRuns">Saved Runs</router-link>
       <a @click='logOut'>Log Out</a>
       </div>
-    <div class='home'>
-      <googleMap class='map'/>
-      <controller />
+    <div class='savedRuns'>
+        <div>
+            <article v-for="(run, i) in runs" :key="i">
+                <h1>{{ run.duration }}</h1>
+            </article>
+        </div>
     </div>
   </div>
 </template>
@@ -15,25 +18,37 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
 import GoogleMap from '@/components/GoogleMap.vue'; // @ is an alias to /src
-import Controller from '@/components/Controller.vue';
 import firebase from 'firebase';
+import { db } from '../main'
+
 
 @Component({
   components: {
     GoogleMap,
-    Controller,
   },
 })
-export default class Home extends Vue {
+export default class SavedRuns extends Vue {
   // Data properties
   // Lifecycle hooks
   // Computed value
   // Component methods
 
     private logOut() {
-    firebase.auth().signOut().then(() => {
-      this.$router.replace('login');
-    });
+        firebase.auth().signOut().then(() => {
+            this.$router.replace('login');
+        });
+    }
+
+    get data() {
+        return {
+            runs: []
+        }
+    }
+
+    get firestore() {
+    return {
+      runs: db.collection('runs')
+    }
   }
 }
 
@@ -49,6 +64,12 @@ export default class Home extends Vue {
 
 .map {
   margin-right: 60px;
+}
+
+.savedRuns {
+    background: white;
+    height: 80vh;
+    width: 80vw;
 }
 
 #nav {

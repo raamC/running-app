@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import SavedRuns from './views/SavedRuns.vue';
 import Login from './views/Login.vue';
 import firebase from 'firebase';
 
@@ -16,6 +17,14 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/savedRuns',
+      name: 'savedRuns',
+      component: SavedRuns,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/',
