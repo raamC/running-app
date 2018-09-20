@@ -3,7 +3,7 @@
     <gmap-map
       :center='center'
       :zoom='zoom'
-      style='width:60vw;  height: 60vh;'
+      style='width:70vw;  height: 80vh;'
       @click='addMarker'
     >
     <gmap-polyline 

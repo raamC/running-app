@@ -43,11 +43,11 @@ export default class Home extends Vue {
 
 .home {
   display: flex;
-  margin: 100px;
+  margin: 60px;
 }
 
 .map {
-  margin-right: 100px;
+  margin-right: 60px;
 }
 
 #nav {
@@ -60,7 +60,7 @@ export default class Home extends Vue {
   h2 {
     text-decoration: none;
     font-weight: bold;
-    font-size: 4em;
+    font-size: 2em;
     padding: 0 20px;
     color: $dark-orange;
     &.router-link-exact-active {
@@ -71,7 +71,7 @@ export default class Home extends Vue {
   a {
     text-decoration: none;
     font-weight: bold;
-    font-size: 4em;
+    font-size: 2em;
     padding: 0 20px;
     color: $dark-orange;
     cursor: pointer;
