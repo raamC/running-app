@@ -6,25 +6,18 @@
       <a @click='logOut'>Log Out</a>
       </div>
     <div class='savedRuns'>
-        <div>
-            <article v-for="(run, i) in runs" :key="i">
-                <h1>{{ run.duration }}</h1>
-            </article>
-        </div>
+        <h1>Saved Runs go here</h1>
     </div>
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
-import GoogleMap from '@/components/GoogleMap.vue'; // @ is an alias to /src
 import firebase from 'firebase';
-import { db } from '../main'
-
 
 @Component({
   components: {
-    GoogleMap,
+    // GoogleMap,
   },
 })
 export default class SavedRuns extends Vue {
@@ -38,18 +31,10 @@ export default class SavedRuns extends Vue {
             this.$router.replace('login');
         });
     }
-
-    get data() {
-        return {
-            runs: []
-        }
-    }
-
-    get firestore() {
-    return {
-      runs: db.collection('runs')
-    }
-  }
+//     get runs() {
+//         console.log(runsCollection)
+//     return runsCollection;
+//   }
 }
 
 </script>
@@ -57,19 +42,10 @@ export default class SavedRuns extends Vue {
 <style lang='scss' scoped >
 @import '../global.scss';
 
-.home {
+.savedRuns {
   display: flex;
   margin: 60px;
-}
-
-.map {
-  margin-right: 60px;
-}
-
-.savedRuns {
-    background: white;
-    height: 80vh;
-    width: 80vw;
+  background: white;
 }
 
 #nav {
