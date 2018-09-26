@@ -29,6 +29,8 @@ declare const google: any;
 export default class Controller extends Vue {
   // Data properties
   private isInKilometers: boolean = true;
+  private date: string = '';
+  private time:string = '';
 
   // Lifecycle hooks
 
