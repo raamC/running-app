@@ -12,6 +12,12 @@
       <b-button @click='removeLastMarker'>Remove point</b-button>
       <b-button @click='resetPath'>Clear</b-button>
     </div>
+    <div class='textInput'>
+      <p>Date</p>
+      <input v-model="date" placeholder="date">
+      <p>Time</p>
+      <input v-model="time" placeholder="time">
+    </div>
   </div>
 </template>
 
@@ -76,9 +82,9 @@ export default class Controller extends Vue {
 <style scoped lang='scss'>
 .controller {
   background-color: white;
-  height: 400px;
+  height: 550px;
   width: 20vw;
-  min-width: 300px;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,10 +98,10 @@ export default class Controller extends Vue {
 .buttonPanel {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 200px;
 }
 
 .buttonPanel > * {
-  margin: 10px;
+  margin: 5px;
 }
 </style>
