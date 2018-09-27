@@ -132,7 +132,7 @@ function calculateDistance(path) {
 
 function calculateElevation(state) {
   // change this to read in distance and change sample number
-    const numberOfSamples = state.distance / 10; // every 10m
+    const numberOfSamples = state.distance / 50; // every 50m
     const elevator = new google.maps.ElevationService();
     const elevatorParams = {
       path: state.completedPath.map((p) => convertPointToLatLng(p)),

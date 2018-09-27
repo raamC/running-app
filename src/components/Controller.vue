@@ -3,9 +3,6 @@
     <div class='distance'>
       {{ distanceString }}
     </div>
-    <div class='elevation'>
-      {{ elevation }}
-    </div>
     <div class='toggle'>
       {{ toggleString }}
     </div>
@@ -15,25 +12,59 @@
       <b-button @click='removeLastMarker'>Remove point</b-button>
       <b-button @click='resetPath'>Clear</b-button>
     </div>
-    <div class='textInput'>
-      <p>Date</p>
-      <input v-model="date" placeholder="date">
-      <p>Time</p>
-      <input v-model="time" placeholder="time">
-    </div>
+    <form
+      @submit="checkForm"
+    >
+      <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li :key='i' v-for='(error, i) in errors'>{{ error }}</li>
+        </ul>
+      </p>
+      <p>
+        <label for="name">Date</label>
+        <input
+          id="date"
+          v-model="date"
+          type="text"
+          name="date"
+          placeholder="DD/MM/YY"
+        >
+      </p>
+      <p>
+        <label for="age">Time</label>
+        <input
+          id="time"
+          v-model="time"
+          type="text"
+          name="time"
+          placeholder="00:00:00"
+          >
+      </p>
+      <p>
+        <input
+          type="submit"
+          value="Submit"
+        >
+      </p>
+    </form>
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
+import firebase from 'firebase';
+import 'firebase/firestore';
 declare const google: any;
 
 @Component
 export default class Controller extends Vue {
   // Data properties
+  private db: any = firebase.firestore();
   private isInKilometers: boolean = true;
   private date: string = '';
-  private time:string = '';
+  private time: string = '';
+  private errors: any[] = [];
 
   // Lifecycle hooks
 
@@ -52,8 +83,7 @@ export default class Controller extends Vue {
   }
 
   get elevation() {
-    console.log(`Elevation: ${this.$store.state.elevation}`)
-    return;
+    return this.$store.state.elevation;
   }
 
   get distanceString() {
@@ -69,6 +99,42 @@ export default class Controller extends Vue {
     } else {
       return 'Manual';
     }
+  }
+
+  // Component Methods
+
+  private checkForm(e) {
+      if (this.date) {
+        this.submitDataToFirebase();
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.date) {
+        this.errors.push('Date required.');
+      }
+
+      e.preventDefault();
+    }
+
+  private submitDataToFirebase() {
+  this.db.collection('runs').add({
+      date: this.formatDate(this.date),
+      distance: this.distance,
+      elevation: this.elevation,
+      path: this.completedPath,
+      time: this.time,
+    });
+  }
+
+  private formatDate(dateString) {
+    // DD/MM/YY
+    const values = dateString.split('/');
+    const year = parseInt(values[2], 10);
+    const month = parseInt(values[1], 10) - 1;
+    const day = parseInt(values[0], 10);
+    return new Date(year, month, day);
   }
 
   private toggleIsSnapped() {
