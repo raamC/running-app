@@ -81,14 +81,14 @@ export default new Vuex.Store({
           .then(() => commit('getCompletedPathFromSteps'))
           .then(() => {
             commit('updateDistance', calculateDistance(state.completedPath));
-            calculateElevation(state.completedPath)
+            calculateElevation(state)
               .then((results) => commit('updateElevation', results));
           });
       } else {
         commit('addNewStep', [stepObject.start, stepObject.end]);
         commit('getCompletedPathFromSteps');
         commit('updateDistance', calculateDistance(state.completedPath));
-        calculateElevation(state.completedPath)
+        calculateElevation(state)
           .then((results) => commit('updateElevation', results));
       }
     },
@@ -97,7 +97,7 @@ export default new Vuex.Store({
       commit('removeLastStepMutation');
       commit('getCompletedPathFromSteps');
       commit('updateDistance', calculateDistance(state.completedPath));
-      calculateElevation(state.completedPath)
+      calculateElevation(state)
         .then((results) => commit('updateElevation', results));
       commit('removeLastClickedMarker');
     },
@@ -130,12 +130,13 @@ function calculateDistance(path) {
   return total;
 }
 
-function calculateElevation(path) {
+function calculateElevation(state) {
   // change this to read in distance and change sample number
+    const numberOfSamples = state.distance / 10; // every 10m
     const elevator = new google.maps.ElevationService();
     const elevatorParams = {
-      path: path.map((p) => convertPointToLatLng(p)),
-      samples: 256,
+      path: state.completedPath.map((p) => convertPointToLatLng(p)),
+      samples: numberOfSamples,
     };
 
     return new Promise((resolve, reject) => {

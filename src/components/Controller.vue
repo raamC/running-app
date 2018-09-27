@@ -53,7 +53,7 @@ export default class Controller extends Vue {
 
   get elevation() {
     console.log(`Elevation: ${this.$store.state.elevation}`)
-    return this.$store.state.elevation;
+    return;
   }
 
   get distanceString() {
