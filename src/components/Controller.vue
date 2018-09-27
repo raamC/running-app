@@ -23,29 +23,28 @@
       </p>
       <p>
         <label for="name">Date</label>
-        <input
+        <b-form-input
           id="date"
           v-model="date"
           type="text"
           name="date"
           placeholder="DD/MM/YY"
-        >
+        ></b-form-input>
       </p>
       <p>
         <label for="age">Time</label>
-        <input
+        <b-form-input
           id="time"
           v-model="time"
           type="text"
           name="time"
           placeholder="00:00:00"
-          >
+          ></b-form-input>
       </p>
       <p>
-        <input
+        <b-button
           type="submit"
-          value="Submit"
-        >
+        >Submit</b-button>
       </p>
     </form>
   </div>
@@ -128,6 +127,8 @@ export default class Controller extends Vue {
     });
   }
 
+  // This will need changing to use timestamps instead
+
   private formatDate(dateString) {
     // DD/MM/YY
     const values = dateString.split('/');
@@ -167,7 +168,7 @@ export default class Controller extends Vue {
 }
 
 .distance {
-  margin: 30px 0 50px;
+  margin: 30px 0;
   font-size: 35px;
 }
 
@@ -175,6 +176,7 @@ export default class Controller extends Vue {
   display: flex;
   flex-direction: column;
   width: 200px;
+  margin-bottom: 20px;
 }
 
 .buttonPanel > * {
