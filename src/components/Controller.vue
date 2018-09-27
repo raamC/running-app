@@ -3,6 +3,9 @@
     <div class='distance'>
       {{ distanceString }}
     </div>
+    <div class='elevation'>
+      {{ elevation }}
+    </div>
     <div class='toggle'>
       {{ toggleString }}
     </div>
@@ -46,6 +49,11 @@ export default class Controller extends Vue {
   get distance() {
     const distance = this.$store.state.distance;
     return (distance / 1000).toFixed(2);
+  }
+
+  get elevation() {
+    console.log(`Elevation: ${this.$store.state.elevation}`)
+    return this.$store.state.elevation;
   }
 
   get distanceString() {

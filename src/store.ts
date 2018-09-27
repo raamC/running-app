@@ -15,6 +15,7 @@ export default new Vuex.Store({
     clickedPath: [],
     completedPath: [],
     distance: 0,
+    elevation: [],
   },
   mutations: {
     // Mutations take the state as the first argument
@@ -43,6 +44,10 @@ export default new Vuex.Store({
 
     updateDistance(state, newDistance) {
       state.distance = newDistance;
+    },
+
+    updateElevation(state, newElevation) {
+      state.elevation = newElevation;
     },
 
     clearSteps(state) {
@@ -76,11 +81,15 @@ export default new Vuex.Store({
           .then(() => commit('getCompletedPathFromSteps'))
           .then(() => {
             commit('updateDistance', calculateDistance(state.completedPath));
+            calculateElevation(state.completedPath)
+              .then((results) => commit('updateElevation', results));
           });
       } else {
         commit('addNewStep', [stepObject.start, stepObject.end]);
         commit('getCompletedPathFromSteps');
         commit('updateDistance', calculateDistance(state.completedPath));
+        calculateElevation(state.completedPath)
+          .then((results) => commit('updateElevation', results));
       }
     },
 
@@ -88,6 +97,8 @@ export default new Vuex.Store({
       commit('removeLastStepMutation');
       commit('getCompletedPathFromSteps');
       commit('updateDistance', calculateDistance(state.completedPath));
+      calculateElevation(state.completedPath)
+        .then((results) => commit('updateElevation', results));
       commit('removeLastClickedMarker');
     },
   },
@@ -117,6 +128,25 @@ function calculateDistance(path) {
     }
   }
   return total;
+}
+
+function calculateElevation(path) {
+  // change this to read in distance and change sample number
+    const elevator = new google.maps.ElevationService();
+    const elevatorParams = {
+      path: path.map((p) => convertPointToLatLng(p)),
+      samples: 256,
+    };
+
+    return new Promise((resolve, reject) => {
+      elevator.getElevationAlongPath(elevatorParams, (elevations, status) => {
+        if (status !== 'OK') {
+          reject('Could not get elevation data');
+        } else {
+          resolve(elevations.map((e) => e.elevation));
+        }
+      });
+    });
 }
 
 function convertPointToLatLng(point) {
