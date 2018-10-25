@@ -2,6 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import * as env from '../env';
+import { Journey } from './models/journey';
+import { DetailedJourney } from './models/detailedJourney';
+import { JourneySummary } from './models/journeySummary';
 declare const google: any;
 
 Vue.use(Vuex);
@@ -9,13 +12,20 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
 
-    // A 2D array of paths
+    // To be removed
     steps: [],
-    isSnapped: true,
     clickedPath: [],
     completedPath: [],
     distance: 0,
     elevation: [],
+    // To be kept
+    isSnapped: true,
+    date: Date.now(),
+    time: 0,
+    journey: new Journey([]),
+    detailedJourney: new DetailedJourney([]),
+    journeySummary: new JourneySummary([], 0, []),
+
   },
   mutations: {
     // Mutations take the state as the first argument
@@ -132,11 +142,11 @@ function calculateDistance(path) {
 
 function calculateElevation(state) {
   // change this to read in distance and change sample number
-    const numberOfSamples = state.distance / 50; // every 50m
+    // const numberOfSamples = state.distance / 50; // every 50m
     const elevator = new google.maps.ElevationService();
     const elevatorParams = {
       path: state.completedPath.map((p) => convertPointToLatLng(p)),
-      samples: numberOfSamples,
+      samples: 10, // always 10 elevation points between Positions
     };
 
     return new Promise((resolve, reject) => {
