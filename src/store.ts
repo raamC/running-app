@@ -21,7 +21,7 @@ export default new Vuex.Store({
     // To be kept
     isSnapped: true,
     date: Date.now(),
-    time: 0,
+    duration: 0,
     journey: new Journey([]),
     detailedJourney: new DetailedJourney([]),
     journeySummary: new JourneySummary([], 0, []),

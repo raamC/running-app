@@ -32,12 +32,12 @@
         ></b-form-input>
       </p>
       <p>
-        <label for="age">Time</label>
+        <label for="age">Duration</label>
         <b-form-input
-          id="time"
-          v-model="time"
+          id="duration"
+          v-model="duration"
           type="text"
-          name="time"
+          name="duration"
           placeholder="00:00:00"
           ></b-form-input>
       </p>
@@ -62,7 +62,7 @@ export default class Controller extends Vue {
   private db: any = firebase.firestore();
   private isInKilometers: boolean = true;
   private date: string = '';
-  private time: string = '';
+  private duration: string = '';
   private errors: any[] = [];
 
   // Lifecycle hooks
@@ -123,7 +123,8 @@ export default class Controller extends Vue {
       distance: this.distance,
       elevation: this.elevation,
       path: this.completedPath,
-      time: this.time,
+      time: this.duration,
+      // need to update Firebase to use duration instead of time
     });
   }
 
