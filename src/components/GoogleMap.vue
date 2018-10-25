@@ -69,8 +69,8 @@ export default class GoogleMap extends Vue {
       const section = new Section(
         this.clickedPath[this.clickedPath.length - 2],
         this.clickedPath[this.clickedPath.length - 1],
-        this.isSnapped
-        )
+        this.isSnapped,
+        );
 
       this.$store.dispatch('addSection', section);
     }

@@ -6,7 +6,7 @@ export interface DetailedJourney {
 
 export class DetailedJourney implements DetailedJourney {
   public detailedSections: DetailedSection[];
-  
+
   constructor(detailedSections: DetailedSection[]) {
     this.detailedSections = detailedSections;
     }

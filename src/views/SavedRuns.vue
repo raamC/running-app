@@ -42,14 +42,15 @@ export default class SavedRuns extends Vue {
     this.db.collection('runs').get()
     .then((snapshot) => {
       snapshot.forEach((doc) => {
-        this.runData.push(doc.data())
+        this.runData.push(doc.data());
       });
     })
     .catch((err) => {
+      // tslint:disable-next-line
       console.log('Error getting documents', err);
     });
-  };
-  
+  }
+
   // Computed value
   // Component methods
 }
