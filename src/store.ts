@@ -61,10 +61,15 @@ export default new Vuex.Store({
     },
 
     clearSteps(state) {
+      // To be removed
       state.steps = [];
       state.completedPath = [];
       state.distance = 0;
       state.clickedPath = [];
+      // To be kept
+      state.journey = new Journey([]);
+      state.detailedJourney = new DetailedJourney([]);
+      state.journeySummary = new JourneySummary([], 0, []);
     },
 
     toggleIsSnapped(state) {
