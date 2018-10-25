@@ -1,15 +1,25 @@
 <template>
   <div>
     <navBar />
-    <div class='savedRuns'>
-        <h1>Saved Runs go here</h1>
-    </div>
-      <ul >
-        <li :key='i' v-for='(run, i) in runData'>
-          {{ run }}
-        </li>
-      </ul>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Distance</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr :key='i' v-for='(run, i) in runData'>
+          <th scope="row">{{ i }}</th>
+          <td>{{ run["date"].toString() }}</td>
+          <td>{{ run["distance"].toString() }}</td>
+          <td>{{ run["time"].toString() }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script lang='ts'>
@@ -47,9 +57,13 @@ export default class SavedRuns extends Vue {
 </script>
 
 <style lang='scss' scoped >
-.savedRuns {
-  display: flex;
-  margin: 60px;
-  background: white;
+
+table {
+  margin: 100px auto;
+  width: 70vw;
+
+  th, td {
+    background: white;
+  }
 }
 </style>
