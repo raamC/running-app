@@ -6,7 +6,7 @@ export interface Journey {
 
 export class Journey implements Journey {
   public sections: Section[];
-  
+
   constructor(sections: Section[]) {
     this.sections = sections;
    }

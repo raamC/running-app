@@ -25,6 +25,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Position } from '../models/position';
 import { gmapApi } from 'vue2-google-maps';
 import { constants } from 'http2';
+import { Section } from '../models/section';
 declare const google: any;
 
 @Component
@@ -61,14 +62,17 @@ export default class GoogleMap extends Vue {
   }
 
   private addMarker(event: any) {
+    // TODO make clickedPath local
     this.$store.commit('updateClickedPath', event.latLng);
+
     if (this.clickedPath.length > 1) {
-      const stepObject = {
-        start: this.clickedPath[this.clickedPath.length - 2],
-        end: this.clickedPath[this.clickedPath.length - 1],
-        isSnapped: this.isSnapped,
-      };
-      this.$store.dispatch('updateSteps', stepObject);
+      const section = new Section(
+        this.clickedPath[this.clickedPath.length - 2],
+        this.clickedPath[this.clickedPath.length - 1],
+        this.isSnapped
+        )
+
+      this.$store.dispatch('addSection', section);
     }
   }
 }

@@ -70,11 +70,19 @@ export default new Vuex.Store({
     toggleIsSnapped(state) {
       state.isSnapped = !state.isSnapped;
     },
+
+    updateDate(state, newDate) {
+      state.date = newDate;
+    },
+
+    updateDuration(state, newDuration) {
+      state.duration = newDuration;
+    },
   },
   actions: {
-    updateSteps({ commit, state }, stepObject) {
-      if (stepObject.isSnapped) {
-        const pathString = preparePathString([stepObject.start, stepObject.end]);
+    addSection({ commit, state }, section) {
+      if (section.isSnapped) {
+        const pathString = preparePathString([section.start, section.end]);
         axios
           .get('https://roads.googleapis.com/v1/snapToRoads', {
             params: {
@@ -95,7 +103,7 @@ export default new Vuex.Store({
               .then((results) => commit('updateElevation', results));
           });
       } else {
-        commit('addNewStep', [stepObject.start, stepObject.end]);
+        commit('addNewStep', [section.start, section.end]);
         commit('getCompletedPathFromSteps');
         commit('updateDistance', calculateDistance(state.completedPath));
         calculateElevation(state)
